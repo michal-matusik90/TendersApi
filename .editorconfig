@@ -10,6 +10,9 @@ tab_width = 2
 # C# files
 [*.cs]
 
+# Diagnostics
+dotnet_diagnostic.CA2208.severity = none
+
 #### Core EditorConfig Options ####
 
 # Indentation and spacing

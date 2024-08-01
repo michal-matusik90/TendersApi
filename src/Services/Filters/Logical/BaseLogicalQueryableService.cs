@@ -21,6 +21,12 @@ public abstract class BaseLogicalQueryableService(IEnumerable<IEqualityQueryable
 
         var parameter = Expression.Parameter(typeof(T), "entity");
         var expressions = filterCriterias.Select(filterCriteria => RunHandler(parameter, filterCriteria));
+
+        if (expressions.Any(x => x is null))
+        {
+            throw new ArgumentNullException(paramName: nameof(expressions), message: "One of returned expressions is null.");
+        }
+
         var finalExpression = expressions.First();
 
         foreach (var expression in expressions.Skip(1))
