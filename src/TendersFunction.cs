@@ -64,6 +64,15 @@ public sealed class TendersFunction(
         string id,
         CancellationToken cancellationToken)
     {
-        throw new NotFiniteNumberException();
+        throw new NotImplementedException();
+    }
+
+    [Function(nameof(SearchApi) + nameof(GetTenderById))]
+    public Task<HttpResponseData> PullTenders(
+        [TimerTrigger("0 0 * * * *", RunOnStartup = true)]
+        TimerInfo timer,
+        CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
     }
 }
