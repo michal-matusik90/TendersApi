@@ -1,13 +1,36 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Azure.Core.Serialization;
+using Microsoft.Azure.Functions.Worker;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json.Converters;
 using TendersApi.Data;
 using TendersApi.Models;
 
 var host = new HostBuilder()
-    .ConfigureFunctionsWorkerDefaults()
+    .UseDefaultServiceProvider((context, options) =>
+    {
+        options.ValidateScopes = context.HostingEnvironment.IsDevelopment();
+        options.ValidateOnBuild = context.HostingEnvironment.IsDevelopment();
+    })
+    .ConfigureFunctionsWebApplication((IFunctionsWorkerApplicationBuilder builder) =>
+    {
+        builder.Services.Configure<WorkerOptions>(workerOptions =>
+        {
+            var settings = NewtonsoftJsonObjectSerializer.CreateJsonSerializerSettings();
+
+            settings.Converters.Add(new StringEnumConverter());
+            settings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            workerOptions.Serializer = new NewtonsoftJsonObjectSerializer(settings);
+        });
+    })
     .ConfigureServices(services =>
     {
+        services.AddApplicationInsightsTelemetryWorkerService();
+        services.ConfigureFunctionsApplicationInsights();
+        services.AddHttpClient();
+        services.AddOptions();
+
         services
             .AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase("TenderDb"));
 

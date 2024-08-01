@@ -15,9 +15,9 @@ public sealed class TendersFunction(
     QueryableService queryableService,
     ILogger<TendersFunction> logger)
 {
-    [Function(nameof(TendersFunction))]
-    public async Task<HttpResponseData> Run(
-        [HttpTrigger(AuthorizationLevel.Function, "get", Route = "tenders")]
+    [Function(nameof(TendersFunction) + nameof(SearchApi))]
+    public async Task<HttpResponseData> SearchApi(
+        [HttpTrigger(AuthorizationLevel.Function, "post", Route = "tenders/search")]
         HttpRequestData req,
         CancellationToken cancellationToken)
     {
@@ -46,5 +46,24 @@ public sealed class TendersFunction(
             logger.LogError(ex, "Unexpected error occured.");
             return req.CreateResponse(HttpStatusCode.InternalServerError);
         }
+    }
+
+    [Function(nameof(SearchApi) + nameof(GetTenders))]
+    public Task<HttpResponseData> GetTenders(
+        [HttpTrigger(AuthorizationLevel.Function, "get", Route = "tenders")]
+        HttpRequestData req,
+        CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
+
+    [Function(nameof(SearchApi) + nameof(GetTenderById))]
+    public Task<HttpResponseData> GetTenderById(
+        [HttpTrigger(AuthorizationLevel.Function, "get", Route = "tenders/{id}")]
+        HttpRequestData req,
+        string id,
+        CancellationToken cancellationToken)
+    {
+        throw new NotFiniteNumberException();
     }
 }
