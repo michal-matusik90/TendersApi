@@ -18,7 +18,8 @@ var host = new HostBuilder()
             var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
             dbContext.Tenders.AddRange(
                 new Tender { TenderId = "1", TenderDate = DateTime.UtcNow },
-                new Tender { TenderId = "2", TenderDate = DateTime.UtcNow.AddDays(-1) }
+                new Tender { TenderId = "2", TenderDate = DateTime.UtcNow.AddDays(-1) },
+                new Tender { TenderId = "3", TenderDate = DateTime.UtcNow.AddDays(-3) }
             );
             dbContext.SaveChanges();
         }
