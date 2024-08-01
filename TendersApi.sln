@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.002.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TendersApi.UnitTests", "tests\TendersApi.UnitTests\TendersApi.UnitTests.csproj", "{4121AD86-2062-4D29-965B-B494EE522866}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TendersApi", "src\TendersApi.csproj", "{FCB4407D-C9B0-4897-8E5B-30680DB99D53}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{5C4CB3BA-B183-4929-9B18-1F0F7DE98B07}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4121AD86-2062-4D29-965B-B494EE522866}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4121AD86-2062-4D29-965B-B494EE522866}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4121AD86-2062-4D29-965B-B494EE522866}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4121AD86-2062-4D29-965B-B494EE522866}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FCB4407D-C9B0-4897-8E5B-30680DB99D53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCB4407D-C9B0-4897-8E5B-30680DB99D53}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCB4407D-C9B0-4897-8E5B-30680DB99D53}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCB4407D-C9B0-4897-8E5B-30680DB99D53}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4121AD86-2062-4D29-965B-B494EE522866} = {5C4CB3BA-B183-4929-9B18-1F0F7DE98B07}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {74B37FEB-EEDB-422E-B666-78519197D81D}
+	EndGlobalSection
+EndGlobal
