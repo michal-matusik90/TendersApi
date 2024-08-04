@@ -31,7 +31,7 @@ public abstract class BaseLogicalQueryableService(IEnumerable<IEqualityQueryable
 
         foreach (var expression in expressions.Skip(1))
         {
-            finalExpression = Expression.OrElse(finalExpression, expression);
+            finalExpression = LogicalExpressionFunc(finalExpression, expression);
         }
 
         var finalLambda = Expression.Lambda<Func<T, bool>>(finalExpression, parameter);

@@ -1,7 +1,8 @@
 ﻿namespace TendersApi.Models;
 
-public enum OrderableFields
+public enum FilterableField
 {
+    Id,
     ValueEur,
-    Date
+    Date,
 }

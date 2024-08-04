@@ -6,14 +6,14 @@ using TendersApi.Validators;
 
 namespace TendersApi.UnitTests.Validators;
 
-public sealed class SearchModelValidatorTests
+public sealed class SearchModelRequestValidatorTests
 {
-    private readonly SearchModelValidator _validator;
+    private readonly SearchModelRequestValidator _validator;
     private readonly Faker _faker;
 
-    public SearchModelValidatorTests()
+    public SearchModelRequestValidatorTests()
     {
-        _validator = new SearchModelValidator();
+        _validator = new SearchModelRequestValidator();
         _faker = new Faker();
     }
 
@@ -25,15 +25,14 @@ public sealed class SearchModelValidatorTests
     [InlineData(1_000_001)]
     public void Validate_ShouldHaveErrors_WhenTakeIsInvalid(int take)
     {
-        var model = new SearchModel { Take = take };
+        var model = new SearchModelRequest { Take = take };
         _validator.TestValidate(model).ShouldHaveValidationErrorFor(x => x.Take);
     }
-
 
     [Fact]
     public void Validate_ShouldNotHaveErrors_WhenTakeIsValid()
     {
-        var model = new SearchModel { Take = _faker.Random.Int(1, 100) };
+        var model = new SearchModelRequest { Take = _faker.Random.Int(1, 100) };
         _validator.TestValidate(model).ShouldNotHaveValidationErrorFor(x => x.Take);
     }
 
@@ -42,21 +41,21 @@ public sealed class SearchModelValidatorTests
     [InlineData(-100)]
     public void Validate_ShouldHaveErrors_WhenSkipIsInvalid(int skip)
     {
-        var model = new SearchModel { Skip = skip };
+        var model = new SearchModelRequest { Skip = skip };
         _validator.TestValidate(model).ShouldHaveValidationErrorFor(x => x.Skip);
     }
 
     [Fact]
     public void Validate_ShouldNotHaveErrors_WhenSkipIsValid()
     {
-        var model = new SearchModel { Skip = _faker.Random.Int(0, int.MaxValue) };
+        var model = new SearchModelRequest { Skip = _faker.Random.Int(0, int.MaxValue) };
         _validator.TestValidate(model).ShouldNotHaveValidationErrorFor(x => x.Skip);
     }
 
     [Fact]
     public void Validate_ShouldHaveErrors_WhenFiltersAreInvalid()
     {
-        var model = new SearchModel
+        var model = new SearchModelRequest
         {
             Filters =
             [
@@ -73,7 +72,7 @@ public sealed class SearchModelValidatorTests
     [Fact]
     public void Validate_ShouldHaveErrors_WhenFilterIsInvalid()
     {
-        var model = new SearchModel
+        var model = new SearchModelRequest
         {
             Filters = [new() { Field = "InvalidField", Operator = "InvalidOperator" }],
             FilterCriteriaOperator = "InvalidOperator"
@@ -86,9 +85,9 @@ public sealed class SearchModelValidatorTests
     [Fact]
     public void Validate_ShouldNotHaveErrors_WhenFiltersAreValid()
     {
-        var model = new SearchModel
+        var model = new SearchModelRequest
         {
-            Filters = [new() { Field = FilterableField.SupplierId.ToString(), Operator = EqualityOperator.Equal.ToString() }]
+            Filters = [new() { Field = FilterableField.Date.ToString(), Operator = EqualityOperator.Equal.ToString() }]
         };
 
         var result = _validator.TestValidate(model);
@@ -100,7 +99,7 @@ public sealed class SearchModelValidatorTests
     [Fact]
     public void Validate_ShouldHaveErrors_WhenOrderByIsInvalid()
     {
-        var model = new SearchModel
+        var model = new SearchModelRequest
         {
             OrderBy = [new() { Field = "InvalidField", Direction = "InvalidDirection", Index = 1 }]
         };
@@ -112,9 +111,9 @@ public sealed class SearchModelValidatorTests
     [Fact]
     public void Validate_ShouldNotHaveValidationErrors_WhenOrderByIsValid()
     {
-        var model = new SearchModel
+        var model = new SearchModelRequest
         {
-            OrderBy = [new() { Field = OrderableFields.PriceEur.ToString(), Direction = OrderDirection.Ascending.ToString() }]
+            OrderBy = [new() { Field = OrderableFields.ValueEur.ToString(), Direction = OrderDirection.Ascending.ToString() }]
         };
 
         var result = _validator.TestValidate(model);

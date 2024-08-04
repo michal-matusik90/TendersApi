@@ -4,10 +4,10 @@ namespace TendersApi.Services.Sorters;
 
 public sealed class OrderByQueryableSubservice(IEnumerable<IOrderDirectionQueryableService> sorters) : IQueryableSubservice
 {
-    public bool CanHandle(SearchModel searchModel)
+    public bool CanHandle(SearchModelRequest searchModel)
         => searchModel is not null && searchModel.OrderBy is not null;
 
-    public IQueryable<T> Handle<T>(IQueryable<T> query, SearchModel searchModel)
+    public IQueryable<T> Handle<T>(IQueryable<T> query, SearchModelRequest searchModel)
     {
         ArgumentNullException.ThrowIfNull(searchModel.OrderBy);
 

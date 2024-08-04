@@ -6,9 +6,3 @@ public sealed class FilterCriteria
     public string? Value { get; set; }
     public string? Operator { get; set; }
 }
-
-public enum FilterableField
-{
-    SupplierId,
-    PriceEur
-}

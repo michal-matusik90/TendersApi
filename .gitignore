@@ -2,8 +2,6 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=visualstudio,csharp,visualstudiocode,git,azurefunctions
 
 ### AzureFunctions ###
-# Azure Functions localsettings file
-local.settings.json
 
 ### Csharp ###
 ## Ignore Visual Studio temporary files, build results, and

@@ -5,6 +5,4 @@ public enum EqualityOperator
     Equal,
     GreaterThan,
     LessThan,
-    GreaterThanOrEqual,
-    LessThanOrEqual,
 }

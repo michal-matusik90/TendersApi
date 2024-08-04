@@ -3,9 +3,9 @@ using TendersApi.Models;
 
 namespace TendersApi.Validators;
 
-public sealed class SearchModelValidator : AbstractValidator<SearchModel>
+public sealed class SearchModelRequestValidator : AbstractValidator<SearchModelRequest>
 {
-    public SearchModelValidator()
+    public SearchModelRequestValidator()
     {
         var allowedLogicalOperators = string.Join(", ", Enum.GetNames<LogicalOperator>());
 

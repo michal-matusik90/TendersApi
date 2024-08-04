@@ -1,0 +1,30 @@
+### 
+GET http://localhost:7042/api/tenders/591469
+
+
+### 
+GET http://localhost:7042/api/tenders
+
+### 
+GET http://localhost:7042/api/suppliers/24071
+
+###
+POST http://localhost:7042/api/tenders/search
+
+{
+    "Filters": [
+        {
+            "Field":"Id",
+            "Value": "502290",
+            "Operator": "Equal"
+        },
+        {
+            "Field":"ValueEur",
+            "Value": "1000000",
+            "Operator": "GreaterThan"
+        }
+    ],
+    "FilterCriteriaOperator": "Or",
+    "Skip": 0,
+    "Take": 30
+}

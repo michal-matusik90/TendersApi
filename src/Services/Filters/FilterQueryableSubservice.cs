@@ -5,10 +5,10 @@ namespace TendersApi.Services.Filters;
 
 public sealed class FilterQueryableSubservice(IEnumerable<ILogicalFilterQueryableService> logicalFilters) : IQueryableSubservice
 {
-    public bool CanHandle(SearchModel searchModel)
+    public bool CanHandle(SearchModelRequest searchModel)
         => searchModel.Filters is not null;
 
-    public IQueryable<T> Handle<T>(IQueryable<T> query, SearchModel searchModel)
+    public IQueryable<T> Handle<T>(IQueryable<T> query, SearchModelRequest searchModel)
     {
         if (searchModel.Filters is null)
         {
