@@ -15,10 +15,9 @@ public class PaginatedRequestValidatorTests
 
     [Theory]
     [InlineData(null)]
-    [InlineData("")]
     [InlineData("0")]
     [InlineData("10")]
-    public void Validate_ShouldNotHaveErrors_WhenSkipIsValid(string skip)
+    public void Validate_ShouldNotHaveErrors_WhenSkipIsValid(string? skip)
     {
         var model = new PaginatedRequest { Skip = skip };
         var result = _validator.TestValidate(model);
@@ -26,10 +25,11 @@ public class PaginatedRequestValidatorTests
     }
 
     [Theory]
+    [InlineData("")]
     [InlineData("-1")]
     [InlineData("abc")]
     [InlineData(" ")]
-    public void Validate_ShouldHaveErrors_WhenSkipIsInvalid(string skip)
+    public void Validate_ShouldHaveErrors_WhenSkipIsInvalid(string? skip)
     {
         var model = new PaginatedRequest { Skip = skip };
         var result = _validator.TestValidate(model);
@@ -38,10 +38,9 @@ public class PaginatedRequestValidatorTests
 
     [Theory]
     [InlineData(null)]
-    [InlineData("")]
     [InlineData("0")]
     [InlineData("10")]
-    public void Validate_ShouldNotHaveErrors_WhenTakeIsValid(string take)
+    public void Validate_ShouldNotHaveErrors_WhenTakeIsValid(string? take)
     {
         var model = new PaginatedRequest { Take = take };
         var result = _validator.TestValidate(model);
@@ -52,7 +51,8 @@ public class PaginatedRequestValidatorTests
     [InlineData("-1")]
     [InlineData("abc")]
     [InlineData(" ")]
-    public void Validate_ShouldHaveErrors_WhenTakeIsInvalid(string take)
+    [InlineData("")]
+    public void Validate_ShouldHaveErrors_WhenTakeIsInvalid(string? take)
     {
         var model = new PaginatedRequest { Take = take };
         var result = _validator.TestValidate(model);

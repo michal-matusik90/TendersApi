@@ -9,9 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TendersApi", "src\TendersAp
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{5C4CB3BA-B183-4929-9B18-1F0F7DE98B07}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Migrations", "src\Migrations\Migrations.csproj", "{6C7BF226-52F6-4C3E-A571-15AF36E9EDC7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Migrations", "src\Migrations\Migrations.csproj", "{6C7BF226-52F6-4C3E-A571-15AF36E9EDC7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Context", "src\Context\Context.csproj", "{22D78CAB-5212-4AA5-A5D6-CBC5DDDC7201}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Context", "src\Context\Context.csproj", "{22D78CAB-5212-4AA5-A5D6-CBC5DDDC7201}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

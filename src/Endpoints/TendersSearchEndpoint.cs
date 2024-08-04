@@ -13,7 +13,7 @@ public sealed class TendersSearchEndpoint(
     QueryableService queryableService,
     IValidator<SearchModelRequest> searchModelValidator,
     TendersContext context,
-    ILogger<TendersEndpoint> logger)
+    ILogger<TendersSearchEndpoint> logger)
 {
     [Function(nameof(TendersApi) + nameof(SearchApi))]
     public async Task<HttpResponseData> SearchApi(

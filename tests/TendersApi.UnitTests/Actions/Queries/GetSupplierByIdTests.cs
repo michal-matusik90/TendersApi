@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using TendersApi.Actions.Queries;
 using TendersApi.Context;
 using TendersApi.Context.Models;
-using TendersApi.Mappers;
 
 namespace TendersApi.UnitTests.Actions.Queries;
 
@@ -27,19 +26,15 @@ public class GetSupplierByIdTests
     public async Task Handle_ShouldReturnTenderDtos_WhenSupplierExists()
     {
         var supplierId = "1";
-        var tenders = new List<Tender>
+        var tender = new Tender
         {
-            new() {
-                Id = "1",
-                Suppliers = [new() { Id = supplierId, Name = "test" }]
-            }
+            Id = "1",
+            Suppliers = [new() { Id = supplierId, Name = "test" }]
         };
 
-        _context.Tenders.AddRange(tenders);
+        _context.Tenders.Add(tender);
         _context.SaveChanges();
         _context.ChangeTracker.Clear();
-
-        var expectedDtos = tenders.Select(TenderToTenderDtoMapper.Map).ToArray();
 
         var result = await _handler.Handle(new GetSupplierById.Query { Id = supplierId }, CancellationToken.None);
 

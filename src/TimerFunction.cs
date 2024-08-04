@@ -28,9 +28,9 @@ public sealed class TimerFunction
         _mediator = mediator;
     }
 
-    //[Function(nameof(TimerFunction) + nameof(PullTenders))]
+    [Function(nameof(TimerFunction) + nameof(PullTenders))]
     public async Task PullTenders(
-        [TimerTrigger("0 0 0 * * *", RunOnStartup = false)]
+        [TimerTrigger("%PullDataSchedule%", RunOnStartup = false)]
         TimerInfo timer,
         CancellationToken cancellationToken)
     {

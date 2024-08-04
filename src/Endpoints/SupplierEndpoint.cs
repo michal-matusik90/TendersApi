@@ -8,7 +8,7 @@ using TendersApi.Actions.Queries;
 
 namespace TendersApi.Endpoints;
 
-public sealed class SupplierEndpoint(IMediator mediator, ILogger<TendersEndpoint> logger)
+public sealed class SupplierEndpoint(IMediator mediator, ILogger<SupplierEndpoint> logger)
 {
     [Function(nameof(GetSupplierById))]
     public async Task<HttpResponseData> GetSupplierById(
@@ -24,7 +24,7 @@ public sealed class SupplierEndpoint(IMediator mediator, ILogger<TendersEndpoint
 
             if (tenders is null || tenders.Length == 0)
             {
-                return request.CreateResponse(HttpStatusCode.NoContent);
+                return request.CreateResponse(HttpStatusCode.NotFound);
             }
 
             var response = request.CreateResponse(HttpStatusCode.OK);

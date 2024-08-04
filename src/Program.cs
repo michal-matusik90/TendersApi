@@ -9,6 +9,7 @@ using Newtonsoft.Json.Converters;
 using TendersApi.Context;
 using TendersApi.DependencyInjection;
 using TendersApi.Mappers;
+using TendersApi.Migrations;
 using TendersApi.Models;
 using TendersApi.Services;
 using TendersApi.Services.Filters;
@@ -38,6 +39,9 @@ var host = new HostBuilder()
     {
         var databaseConnectionString = context.Configuration.GetConnectionString("TendersDatabase");
 
+        services.AddScoped<IOrderByPropertyTypeService, BaseOrderByPropertyTypeService<string>>();
+        services.AddScoped<IOrderByPropertyTypeService, BaseOrderByPropertyTypeService<decimal>>();
+        services.AddScoped<IOrderByPropertyTypeService, BaseOrderByPropertyTypeService<DateOnly>>();
         services.AddScoped<IQueryableSubservice, FilterQueryableSubservice>();
         services.AddScoped<IEqualityQueryableService, GreaterThanEqualityQueryableService>();
         services.AddScoped<IEqualityQueryableService, LessThanEqualityQueryableService>();
@@ -48,9 +52,6 @@ var host = new HostBuilder()
         services.AddScoped<IQueryableSubservice, OrderByQueryableSubservice>();
         services.AddScoped<IQueryableSubservice, TakeQueryableSubservice>();
         services.AddScoped<IQueryableSubservice, SkipQueryableSubservice>();
-
-        services.AddScoped<IOrderDirectionQueryableService, AscendingQueryableService>();
-        services.AddScoped<IOrderDirectionQueryableService, DescendingQueryableService>();
 
         services.AddScoped<QueryableService>();
         services.AddScoped<IValidator<PaginatedRequest>, PaginatedRequestValidator>();
@@ -63,6 +64,7 @@ var host = new HostBuilder()
             options.UseSqlServer(databaseConnectionString, opt =>
             {
                 opt.EnableRetryOnFailure();
+                opt.MigrationsAssembly(typeof(DatabaseContextFactory).Assembly.FullName);
             });
 
         }, ServiceLifetime.Scoped);
@@ -70,6 +72,11 @@ var host = new HostBuilder()
         {
             cfg.RegisterServicesFromAssembly(typeof(Program).Assembly);
         });
+
+        using var scope = services.BuildServiceProvider().CreateScope();
+        var tendersContext = scope.ServiceProvider.GetRequiredService<TendersContext>();
+        tendersContext.Database.Migrate();
+        tendersContext.Database.EnsureCreated();
     })
     .Build();
 

@@ -8,7 +8,7 @@ using TendersApi.Actions.Queries;
 
 namespace TendersApi.Endpoints;
 
-public sealed class TenderEndpoint(IMediator mediator, ILogger<TendersEndpoint> logger)
+public sealed class TenderEndpoint(IMediator mediator, ILogger<TenderEndpoint> logger)
 {
     [Function(nameof(GetTenderById))]
     public async Task<HttpResponseData> GetTenderById(
@@ -24,7 +24,7 @@ public sealed class TenderEndpoint(IMediator mediator, ILogger<TendersEndpoint> 
 
             if (tender is null)
             {
-                return request.CreateResponse(HttpStatusCode.NoContent);
+                return request.CreateResponse(HttpStatusCode.NotFound);
             }
 
             var response = request.CreateResponse(HttpStatusCode.OK);

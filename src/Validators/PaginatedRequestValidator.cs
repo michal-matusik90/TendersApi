@@ -12,8 +12,8 @@ public sealed class PaginatedRequestValidator : AbstractValidator<PaginatedReque
             RuleFor(x => x.Skip).Must(x => int.TryParse(x, out var _)).WithMessage(GetMessage(nameof(PaginatedRequest.Skip)));
             When(x => int.TryParse(x.Skip, out var _), () =>
             {
-                RuleFor(x => int.Parse(x.Skip!))
-                    .GreaterThanOrEqualTo(0)
+                RuleFor(x => x.Skip)
+                    .Must(x => int.Parse(x!) >= 0)
                     .WithMessage(GetMessage(nameof(PaginatedRequest.Skip)));
             });
         });
@@ -23,8 +23,8 @@ public sealed class PaginatedRequestValidator : AbstractValidator<PaginatedReque
             RuleFor(x => x.Take).Must(x => int.TryParse(x, out var _)).WithMessage(GetMessage(nameof(PaginatedRequest.Take)));
             When(x => int.TryParse(x.Take, out var _), () =>
             {
-                RuleFor(x => int.Parse(x.Take!))
-                    .GreaterThanOrEqualTo(0)
+                RuleFor(x => x.Take)
+                    .Must(x => int.Parse(x!) >= 0)
                     .WithMessage(GetMessage(nameof(PaginatedRequest.Take)));
             });
         });

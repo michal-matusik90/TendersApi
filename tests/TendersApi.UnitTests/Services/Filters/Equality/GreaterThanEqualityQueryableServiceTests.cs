@@ -53,7 +53,7 @@ public sealed class GreaterThanEqualityQueryableServiceTests
         var filterCriteria = new FilterCriteria
         {
             Field = nameof(TestModel.Birthday),
-            Value = _faker.Date.PastDateOnly().ToString(),
+            Value = _faker.Date.PastDateOnly().ToString("yyyy-MM-dd"),
             Operator = nameof(Expression.GreaterThan)
         };
 
