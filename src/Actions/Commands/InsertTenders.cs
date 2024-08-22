@@ -11,7 +11,7 @@ public sealed class InsertTenders
         public IEnumerable<Tender> Tenders { get; init; } = [];
     }
 
-    public sealed class Handler(TendersContext context) : IRequestHandler<Command>
+    public sealed class Handler(ApplicationDbContext context) : IRequestHandler<Command>
     {
         public async Task Handle(Command request, CancellationToken cancellationToken)
         {

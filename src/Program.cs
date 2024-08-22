@@ -59,7 +59,7 @@ var host = new HostBuilder()
         services.AddScoped<ExternalApiDataToTenderMapper>();
         services.AddOptions();
         services.AddExternalTendersApi(context.Configuration);
-        services.AddDbContext<TendersContext>(options =>
+        services.AddDbContext<ApplicationDbContext>(options =>
         {
             options.UseSqlServer(databaseConnectionString, opt =>
             {
@@ -74,7 +74,7 @@ var host = new HostBuilder()
         });
 
         using var scope = services.BuildServiceProvider().CreateScope();
-        var tendersContext = scope.ServiceProvider.GetRequiredService<TendersContext>();
+        var tendersContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
         tendersContext.Database.Migrate();
         tendersContext.Database.EnsureCreated();
     })

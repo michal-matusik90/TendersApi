@@ -13,7 +13,7 @@ public sealed class GetTenderById
         public string Id { get; init; } = default!;
     }
 
-    public sealed class Handler(TendersContext context) : IRequestHandler<Query, TenderDto?>
+    public sealed class Handler(ApplicationDbContext context) : IRequestHandler<Query, TenderDto?>
     {
         public Task<TenderDto?> Handle(Query request, CancellationToken cancellationToken)
             => context.Tenders

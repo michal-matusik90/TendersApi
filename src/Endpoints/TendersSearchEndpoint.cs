@@ -12,7 +12,7 @@ namespace TendersApi.Endpoints;
 public sealed class TendersSearchEndpoint(
     QueryableService queryableService,
     IValidator<SearchModelRequest> searchModelValidator,
-    TendersContext context,
+    ApplicationDbContext context,
     ILogger<TendersSearchEndpoint> logger)
 {
     [Function(nameof(TendersApi) + nameof(SearchApi))]

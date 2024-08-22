@@ -36,3 +36,11 @@ REST API should provide users access to data available in https://tenders.guru/p
 * Tender’s suppliers
 * Supplier’s ID
 * Supplier’s Name
+
+
+# Running code locally
+
+## Prerequisites:
+
+* Azurite Storage Emulator
+https://learn.microsoft.com/en-us/azure/storage/common/storage-use-azurite?tabs=visual-studio%2Cblob-storage#install-azurite

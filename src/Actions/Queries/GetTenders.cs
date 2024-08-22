@@ -14,7 +14,7 @@ public sealed class GetTenders
         public int Take { get; init; }
     }
 
-    public sealed class Handler(TendersContext context) : IRequestHandler<Query, TenderDto[]>
+    public sealed class Handler(ApplicationDbContext context) : IRequestHandler<Query, TenderDto[]>
     {
         public Task<TenderDto[]> Handle(Query request, CancellationToken cancellationToken)
             => context.Tenders
